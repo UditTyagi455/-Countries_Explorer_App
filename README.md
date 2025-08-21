@@ -1,97 +1,134 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 🌎 Countries Explorer App
 
-# Getting Started
+A React Native interview task that showcases country data with search, region filters, navigation to a detail view, favorites with persistence, and a light/dark theme switcher.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+---
 
-## Step 1: Start Metro
+# 📸 Screenshots
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+![Home Screen](./assets\image\Screenshot_1755785133.png)
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## ✨ Features
 
-```sh
-# Using npm
-npm start
+* Fetch countries from **REST Countries v3** (`/v3.1/all?fields=name,flags,region,population,languages,currencies,timezones`)
+* Countries list with **name**, **flag**, and **region**
+* **Search** (case‑insensitive) by country name
+* **Filter by region** (All, Africa, Americas, Asia, Europe, Oceania, Antarctic)
+* **Details screen**: population, languages, currencies, timezones
+* **Loading** state + **error with retry**
+* **FlatList** with proper `keyExtractor` and memoized rows
+* **Favorites**: mark/unmark and **persist** with AsyncStorage (or MMKV)
+* **Light/Dark theme** toggle via React Context
+* **React Navigation** for stack navigation
 
-# OR using Yarn
-yarn start
+> This repo is designed to evaluate coding style, state management, navigation, and performance handling.
+
+---
+
+## 🛠️ Tech Stack
+
+* **React Native** (CLI or Expo)
+* **TypeScript** (optional but recommended)
+* **React Navigation** (`@react-navigation/native`, `@react-navigation/native-stack`)
+* **AsyncStorage** (`@react-native-async-storage/async-storage`) or **MMKV** (`react-native-mmkv`)
+* **React Context** for theme + favorites state
+* **Jest** + **@testing-library/react-native** (optional test setup)
+
+---
+
+## 📦 Getting Started
+
+### 1) Prerequisites
+
+* Node.js LTS
+* Yarn or npm
+* Xcode (iOS) / Android Studio (Android)
+
+### 2) Clone
+
+```bash
+git clone https://github.com/UditTyagi455/-Countries_Explorer_App.git
+cd -countries-explorer
 ```
 
-## Step 2: Build and run your app
+### 3) Install dependencies
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+```bash
+# using yarn
+yarn
 
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+# or npm
+npm install
 ```
 
-### iOS
+#### If using **React Native CLI**
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+```bash
+# iOS
+cd ios && pod install && cd ..
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+# run
+npx react-native run-ios
+npx react-native run-android
 ```
 
-Then, and every time you update your native dependencies, run:
 
-```sh
-bundle exec pod install
+---
+
+## ⚙️ Environment
+
+No API keys required. Public API endpoint (REST Countries):
+
+```
+https://restcountries.com/v3.1/all?fields=name,flags,region,population,languages,currencies,timezones
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+---
 
-```sh
-# Using npm
-npm run ios
+## 🗂️ Project Structure (suggested)
 
-# OR using Yarn
-yarn ios
+```
+src/
+  components/
+    CountryDetail
+    CountryList
+  screens/
+    HomeScreen.tsx      # list + search + region filter
+App.tsx
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+---
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## 🔌 API Notes
 
-## Step 3: Modify your app
+Sample country shape (simplified):
 
-Now that you have successfully run the app, let's make changes!
+```json
+{
+  "name": { "common": "Germany" },
+  "flags": { "png": "https://.../de.png", "svg": "https://.../de.svg" },
+  "region": "Europe",
+  "population": 83240525,
+  "languages": { "deu": "German" },
+  "currencies": { "EUR": { "name": "Euro", "symbol": "€" } },
+  "timezones": ["UTC+01:00"]
+}
+```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+---
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+## 📱 Usage
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+* **Home**: list of countries, search bar, region filter chips/buttons
+* Tap a country → **Details**: flag, region, population, languages, currencies, timezones
+* Tap ⭐ on a country to add/remove from **Favorites** (persisted)
+* Toggle **Theme** in header or settings button
 
-## Congratulations! :tada:
+---
 
-You've successfully run and modified your React Native App. :partying_face:
+## 🧩 Key Implementation Details
 
-### Now what?
+### State Management
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+* **ThemeContext**: provides current theme + toggle function
+* **FavoritesContext**: manages a Set
